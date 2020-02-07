@@ -43,4 +43,13 @@ public class Cart {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "idClient=" + idClient +
+                ", idProduct=" + idProduct +
+                ", date=" + date +
+                '}';
+    }
 }

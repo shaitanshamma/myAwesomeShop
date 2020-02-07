@@ -58,4 +58,14 @@ public class Order {
     public void setOrderDate(Long orderDate) {
         this.orderDate = orderDate;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", idClient=" + idClient +
+                ", idProduct=" + idProduct +
+                ", orderDate=" + orderDate +
+                '}';
+    }
 }

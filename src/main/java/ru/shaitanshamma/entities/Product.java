@@ -31,6 +31,11 @@ public class Product {
     @NotNull
     private Long quantity;
 
+    @Column(name = "brand_fld")
+    @NotNull
+    private Long brand;
+
+
     public Product() {
     }
 
@@ -80,5 +85,24 @@ public class Product {
 
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
+    }
+
+    public Long getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Long brand) {
+        this.brand = brand;
+    }
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", about='" + about + '\'' +
+                ", category=" + category +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
     }
 }

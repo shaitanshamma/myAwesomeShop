@@ -104,4 +104,18 @@ public class OrderAdress {
     public void setBuilding(int building) {
         this.building = building;
     }
+
+    @Override
+    public String toString() {
+        return "OrderAdress{" +
+                "id=" + id +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", postIndex=" + postIndex +
+                ", street='" + street + '\'' +
+                ", region='" + region + '\'' +
+                ", appartament=" + appartament +
+                ", building=" + building +
+                '}';
+    }
 }
