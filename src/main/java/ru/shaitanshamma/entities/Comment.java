@@ -9,8 +9,11 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_client")
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "id_client")
+    private Long idClient;
 
     @Column(name = "comment_fld")
     private String comment;
@@ -24,6 +27,14 @@ public class Comment {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(Long idClient) {
+        this.idClient = idClient;
     }
 
     public String getComment() {
