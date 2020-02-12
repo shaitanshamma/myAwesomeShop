@@ -42,9 +42,10 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<Client> findAll() {
-        return clientRepository.findAll().stream()
-                .map(Client::new)
-                .collect(Collectors.toList());
+        return null;
+//                clientRepository.findAll().stream()
+//                .map(Client::new)
+//                .collect(Collectors.toList());
     }
 
     @Override
