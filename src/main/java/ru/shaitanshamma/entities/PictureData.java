@@ -13,7 +13,7 @@ public class PictureData {
     private Long id;
 
     @Lob
-    @Column(name = "data", nullable = false, columnDefinition="MEDIUMBLOB")
+    @Column(name = "data_fld")
     private byte[] data;
 
     public PictureData() {

@@ -2,6 +2,7 @@ package ru.shaitanshamma.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "product_tbl")
@@ -35,6 +36,11 @@ public class Product {
     @NotNull
     private Long brand;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinTable(name = "products_pictures_tbl",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "picture_id"))
+    private List<Picture> pictures;
 
     public Product() {
     }
@@ -94,6 +100,14 @@ public class Product {
     public void setBrand(Long brand) {
         this.brand = brand;
     }
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
