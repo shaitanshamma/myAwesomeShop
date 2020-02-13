@@ -4,6 +4,7 @@ package ru.shaitanshamma.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users_role_tbl")
@@ -18,11 +19,25 @@ public class Role {
     @NotNull
     private String title;
 
-    @Column(name = "role_fld")
-    @NotNull
-    private String role;
+    @ManyToMany()
+    @JoinTable(name = "roles_tbl",
+            joinColumns = @JoinColumn(name = "id_role"),
+            inverseJoinColumns = @JoinColumn(name = "id_client"))
+    private Set<Client> clients;
 
     public Role() {
+    }
+
+    public Role(String title) {
+        this.title = title;
+    }
+
+    public Set<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(Set<Client> clients) {
+        this.clients = clients;
     }
 
     public Long getId() {
@@ -41,24 +56,16 @@ public class Role {
         this.title = title;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Role role1 = (Role) o;
-        return Objects.equals(role, role1.role);
+        Role role = (Role) o;
+        return Objects.equals(title, role.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(role);
+        return Objects.hash(title);
     }
 }

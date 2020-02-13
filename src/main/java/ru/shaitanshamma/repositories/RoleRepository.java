@@ -10,6 +10,6 @@ import ru.shaitanshamma.entities.Role;
 @Repository
 public interface RoleRepository extends CrudRepository<Role, Long> {
 
-    @Query("from Role r where name = :name")
-    Role findOneByName(String name);
+   @Query("from Role r where r.title = :name")
+    Role findOneByTitle(String name);
 }

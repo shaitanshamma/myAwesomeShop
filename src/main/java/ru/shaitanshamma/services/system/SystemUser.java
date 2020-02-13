@@ -2,6 +2,9 @@ package ru.shaitanshamma.services.system;
 
 
 import ru.shaitanshamma.entities.Client;
+import ru.shaitanshamma.entities.Role;
+
+import java.util.Set;
 
 public class SystemUser {
 
@@ -19,20 +22,20 @@ public class SystemUser {
 
     private int phone;
 
-    private int role;
+    private Set<Role> roles;
 
     public SystemUser() {
 
     }
 
-    public SystemUser(String name, String lastName, String login, String password, String email, int phone, int role) {
+    public SystemUser(String name, String lastName, String login, String password, String email, int phone, Set<Role> roles) {
         this.name = name;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
         this.email = email;
         this.phone = phone;
-        this.role = role;
+        this.roles = roles;
     }
 
     public SystemUser(Client client) {
@@ -43,7 +46,7 @@ public class SystemUser {
         this.password = client.getPassword();
         this.email = client.getEmail();
         this.phone = client.getPhone();
-        this.role = client.getRole();
+        this.roles = client.getRoles();
     }
 
     public Long getId() {
@@ -102,11 +105,11 @@ public class SystemUser {
         this.phone = phone;
     }
 
-    public int getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(int role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

@@ -28,6 +28,10 @@ public class ProductDot {
     this.brand = product.getBrand();
     }
 
+    public ProductDot() {
+
+    }
+
     public Long getId() {
         return id;
     }

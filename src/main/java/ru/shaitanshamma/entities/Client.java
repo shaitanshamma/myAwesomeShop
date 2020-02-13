@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "client_tbl")
@@ -38,12 +40,39 @@ public class Client {
     @NotNull
     private int phone;
 
-    @Column(name = "role_fld")
-    @NotNull
-    private int role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "roles_tbl",
+            joinColumns = @JoinColumn(name = "id_client"),
+            inverseJoinColumns = @JoinColumn(name = "id_role"))
+    private Set<Role> roles;
 
     public Client() {
+        this.roles = new HashSet<>();
     }
+
+    public Client(String name, String lastName, String login, String password, String email, int phone) {
+        this(name,lastName,login,password,email,phone,new HashSet<>());
+    }
+
+    public Client(String name, String lastName, String login, String password, String email, int phone, Set<Role> roles) {
+        this.name = name;
+        this.lastName = lastName;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.roles = roles;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+
 
     public Long getId() {
         return id;
@@ -101,13 +130,6 @@ public class Client {
         this.phone = phone;
     }
 
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
-    }
 
     @Override
     public String toString() {
@@ -119,7 +141,6 @@ public class Client {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", phone=" + phone +
-                ", role=" + role +
                 '}';
     }
 }
