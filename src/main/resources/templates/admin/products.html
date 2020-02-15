@@ -25,8 +25,10 @@
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Name</th>
-                        <th>Categories</th>
+                        <th>Title</th>
+                        <th>About</th>
+                        <th>Category</th>
+                        <th>Brand</th>
                         <th>Price</th>
                         <th class="actions">Actions</th>
                     </tr>
@@ -34,9 +36,11 @@
                     <tbody>
                     <tr th:each="prod : ${products}">
                         <td th:text="${prod.id}"></td>
-                        <td th:text="${prod.name}"></td>
-                        <td th:text="${prod.categoriesAsString}"></td>
+                        <td th:text="${prod.title}"></td>
+                        <td th:text="${prod.about}"></td>
+                        <td th:text="${prod.category}"></td>
                         <td th:text="${prod.price}"></td>
+                        <td th:text="${prod.brand}"></td>
                         <td>
                             <a th:href="@{product/{id}/edit(id=${prod.id})}" class="btn btn-icon btn-pill btn-primary" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                             <a th:href="@{product/{id}/delete(id=${prod.id})}" class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-fw fa-trash"></i></a>

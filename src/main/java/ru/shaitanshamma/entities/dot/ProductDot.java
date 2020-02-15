@@ -1,6 +1,12 @@
 package ru.shaitanshamma.entities.dot;
 
+import org.springframework.web.multipart.MultipartFile;
+import ru.shaitanshamma.entities.Category;
+import ru.shaitanshamma.entities.Picture;
 import ru.shaitanshamma.entities.Product;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductDot {
 
@@ -18,6 +24,18 @@ public class ProductDot {
 
     private Long brand;
 
+    private List<Picture> pictures;
+
+    private MultipartFile[] newPictures;
+
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public MultipartFile[] getNewPictures() {
+        return newPictures;
+    }
+
     public ProductDot(Product product) {
     this.id = product.getId();
     this.title = product.getTitle();
@@ -26,6 +44,7 @@ public class ProductDot {
     this.price = product.getPrice();
     this.quantity = product.getQuantity();
     this.brand = product.getBrand();
+    this.pictures = product.getPictures();
     }
 
     public ProductDot() {
@@ -87,4 +106,12 @@ public class ProductDot {
     public void setBrand(Long brand) {
         this.brand = brand;
     }
+
+//    public String getCategoriesAsString() {
+//        return getCategory().
+////                .stream()
+////                .map(Category::getTitle)
+////                .collect(Collectors.joining(", "));
+//    }
+
 }
