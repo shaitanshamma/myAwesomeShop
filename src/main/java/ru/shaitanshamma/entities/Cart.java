@@ -2,6 +2,7 @@ package ru.shaitanshamma.entities;
 
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -28,7 +29,7 @@ public class Cart {
     private Long idProduct;
 
     @Column(name = "date_fld")
-    private Date date;
+    private LocalDateTime date;
 
     public Cart() {
     }
@@ -49,18 +50,19 @@ public class Cart {
         this.idProduct = idProduct;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
     @Override
     public String toString() {
         return "Cart{" +
-                "idClient=" + idClient +
+                "id=" + id +
+                ", idClient=" + idClient +
                 ", idProduct=" + idProduct +
                 ", date=" + date +
                 '}';
