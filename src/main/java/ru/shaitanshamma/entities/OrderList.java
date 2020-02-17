@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "order_list_tbl")
-public class OrderItem {
+public class OrderList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -27,7 +27,7 @@ public class OrderItem {
     @Column(name = "total_price_fld")
     private Double totalPrice;
 
-    public OrderItem() {
+    public OrderList() {
     }
 
     public Long getId() {

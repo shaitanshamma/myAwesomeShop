@@ -22,16 +22,8 @@ public class Order {
     private Client client;
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "order", fetch = FetchType.EAGER)
-    private List<OrderItem> orderItems;
+    private List<OrderList> orderLists;
 
-
-    //    @Column(name = "id_product")
-//    @NotNull
-//    private Long idProduct;
-//
-//    @Column(name = "order_date_fld")
-//    @NotNull
-//    private Long orderDate;
     @Column(name = "create_at_fld")
     @CreationTimestamp
     private LocalDateTime createAt;
@@ -46,23 +38,6 @@ public class Order {
     public void setId(Long id) {
         this.id = id;
     }
-//
-//    public Long getIdProduct() {
-//        return idProduct;
-//    }
-//
-//    public void setIdProduct(Long idProduct) {
-//        this.idProduct = idProduct;
-//    }
-//
-//    public Long getOrderDate() {
-//        return orderDate;
-//    }
-//
-//    public void setOrderDate(Long orderDate) {
-//        this.orderDate = orderDate;
-//    }
-
 
     public LocalDateTime getCreateAt() {
         return createAt;
@@ -72,4 +47,19 @@ public class Order {
         this.createAt = createAt;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<OrderList> getOrderLists() {
+        return orderLists;
+    }
+
+    public void setOrderLists(List<OrderList> orderLists) {
+        this.orderLists = orderLists;
+    }
 }

@@ -31,6 +31,12 @@ public class Cart {
     @Column(name = "date_fld")
     private LocalDateTime date;
 
+    @Column(name = "product_price_fld")
+    private Double itemPrice;
+
+    @Column(name = "total_price_fld")
+    private Double totalPrice;
+
     public Cart() {
     }
 
@@ -56,6 +62,22 @@ public class Cart {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public Double getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(Double itemPrice) {
+        this.itemPrice = itemPrice;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     @Override
