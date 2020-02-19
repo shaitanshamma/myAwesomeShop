@@ -1,12 +1,17 @@
 package ru.shaitanshamma.entities;
 
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "users_role_tbl")
 public class Role {
 
@@ -24,37 +29,6 @@ public class Role {
             joinColumns = @JoinColumn(name = "id_role"),
             inverseJoinColumns = @JoinColumn(name = "id_client"))
     private Set<Client> clients;
-
-    public Role() {
-    }
-
-    public Role(String title) {
-        this.title = title;
-    }
-
-    public Set<Client> getClients() {
-        return clients;
-    }
-
-    public void setClients(Set<Client> clients) {
-        this.clients = clients;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     @Override
     public boolean equals(Object o) {

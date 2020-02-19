@@ -27,10 +27,10 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/cart")
-    public String cartPage() {
-        return "cart";
-    }
+//    @GetMapping("/cart")
+//    public String cartPage() {
+//        return "cart";
+//    }
 
     @GetMapping("/checkout")
     public String checkoutPage() {

@@ -1,10 +1,15 @@
 package ru.shaitanshamma.entities;
 
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "brand_tbl")
 public class Brand {
 
@@ -16,25 +21,6 @@ public class Brand {
     @Column(name = "title_fld")
     @NotNull
     private String title;
-
-    public Brand() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     @Override
     public String toString() {
