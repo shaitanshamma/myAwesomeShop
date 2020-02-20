@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
+import ru.shaitanshamma.aspect.ExecutionTime;
 import ru.shaitanshamma.entities.Product;
 import ru.shaitanshamma.entities.dot.ProductDot;
 import ru.shaitanshamma.repositories.ProductRepository;
@@ -28,6 +29,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
+    @ExecutionTime
     public List<ProductDot> findAll() {
         return productRepository.findAll().stream()
                 .map(ProductDot::new)
@@ -36,6 +38,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
+    @ExecutionTime
     public ProductDot findById(Long id) {
         return new ProductDot(productRepository.findById(id).get());
     }
