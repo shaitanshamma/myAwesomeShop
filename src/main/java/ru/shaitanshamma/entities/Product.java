@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -41,7 +42,7 @@ public class Product {
 
     @Column(name = "price_fld")
     @NotNull
-    private Long price;
+    private BigDecimal price;
 
     @Column(name = "quantity_fld")
     @NotNull

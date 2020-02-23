@@ -17,23 +17,23 @@ import ru.shaitanshamma.services.ProductService;
 @Controller
 public class CartController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AdminProductsController.class);
-
-    private final ProductService productService;
-
-    private final ClientService clientService;
-
-    @Autowired
-    public CartController (ProductService productService, ClientService clientService){
-        this.productService = productService;
-        this.clientService = clientService;
-    }
-
-    @GetMapping("/cart")
-    public String cartProductsPage(Model model) {
-        model.addAttribute("activePage", "Products");
-        model.addAttribute("cart", productService.findAll());
-        return "/cart";
-    }
+//    private static final Logger logger = LoggerFactory.getLogger(AdminProductsController.class);
+//
+//    private final ProductService productService;
+//
+//    private final ClientService clientService;
+//
+//    @Autowired
+//    public CartController (ProductService productService, ClientService clientService){
+//        this.productService = productService;
+//        this.clientService = clientService;
+//    }
+//
+//    @GetMapping("/cart")
+//    public String cartProductsPage(Model model) {
+//        model.addAttribute("activePage", "Products");
+//        model.addAttribute("cart", productService.findAll());
+//        return "/cart";
+//    }
 
 }

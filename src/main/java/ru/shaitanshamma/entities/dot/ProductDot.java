@@ -7,6 +7,7 @@ import ru.shaitanshamma.entities.Picture;
 import ru.shaitanshamma.entities.Product;
 import ru.shaitanshamma.repositories.PictureRepository;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -31,7 +32,7 @@ public class ProductDot {
         this.categories = categories;
     }
 
-    private Long price;
+    private BigDecimal price;
 
     private Long quantity;
 
@@ -98,11 +99,11 @@ public class ProductDot {
         this.about = about;
     }
 
-    public Long getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

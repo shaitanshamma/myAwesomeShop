@@ -7,7 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import ru.shaitanshamma.entities.dot.ProductDot;
+import ru.shaitanshamma.repositories.CartItemRepr;
+import ru.shaitanshamma.repositories.ProductRepository;
+import ru.shaitanshamma.repositories.ProductRepr;
+import ru.shaitanshamma.services.CartService;
 import ru.shaitanshamma.services.ProductService;
+import ru.shaitanshamma.services.system.ProductInfo;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class MainController {
@@ -16,21 +25,25 @@ public class MainController {
 
     private final ProductService productService;
 
+    private final CartService cartService;
+
     @Autowired
-    public MainController(ProductService productService) {
+    public MainController(ProductService productService, CartService cartService) {
         this.productService = productService;
+        this.cartService = cartService;
     }
 
     @GetMapping("/")
     public String indexPage(Model model) {
         model.addAttribute("products", productService.findAll());
+        model.addAttribute("cartItems", cartService.findAllItems());
         return "index";
     }
 
-//    @GetMapping("/cart")
-//    public String cartPage() {
-//        return "cart";
-//    }
+    @GetMapping("/cart")
+    public String cartPage() {
+        return "cart";
+    }
 
     @GetMapping("/checkout")
     public String checkoutPage() {
@@ -49,5 +62,16 @@ public class MainController {
     public String storePage(Model model) {
         model.addAttribute("products", productService.findAll());
         return "store";
+    }
+
+    @PostMapping("/cart/update")
+    public String updateCart(CartItemRepr cartItemRepr, HttpServletRequest httpServletRequest) {
+        logger.info("Update customer cart");
+        ProductDot product = productService.findById(cartItemRepr.getProductId());
+
+        if (product != null) {
+            cartService.addItemQty(new ProductInfo(product, "", ""), cartItemRepr.getQty());
+        }
+        return "redirect:" + cartItemRepr.getPageUrl();
     }
 }

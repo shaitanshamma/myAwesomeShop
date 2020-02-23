@@ -1,27 +1,24 @@
 package ru.shaitanshamma.services;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import ru.shaitanshamma.entities.Cart;
-import ru.shaitanshamma.entities.Client;
-import ru.shaitanshamma.entities.Product;
-import ru.shaitanshamma.repositories.ProductRepository;
+import ru.shaitanshamma.entities.dot.ProductDot;
+import ru.shaitanshamma.services.system.ProductInfo;
 
-@Service
-public class CartService {
+import java.math.BigDecimal;
+import java.util.Map;
 
-    private ProductRepository productRepository;
 
-    @Autowired
-    public void setProductRepository(ProductRepository productRepository){
-        this.productRepository = productRepository;
-    }
+public interface CartService {
 
-    public Cart addToCart(Product product, Client client){
-        Cart cart = new Cart();
-        cart.setIdClient(client.getId());
-        cart.setIdProduct(product.getId());
-        return cart;
-    }
+    void addItemQty(ProductInfo productInfo, int qty);
+
+    void removeItemQty(ProductInfo productInfo, int qty);
+
+    void removeItem(ProductInfo productInfo);
+
+    Map<ProductInfo, Integer> findAllItems();
+
+    Integer getItemsQty();
+
+    BigDecimal getSubTotal();
 }

@@ -63,7 +63,7 @@
             <img th:src="@{/picture/{pictureId}(pictureId=${product.pictures[0].id})}" alt="">
         </div>
         <div class="product-body">
-            <h3 class="product-name"><a th:href="@{/product/{id}(id=${product.id})}" th:text="${product.name}">product name goes here</a></h3>
+            <h3 class="product-name"><a th:href="@{/product/{id}(id=${product.id})}" th:text="${product.title}">product name goes here</a></h3>
             <h4 class="product-price">
                 <span class="qty">[[${qty}]]x</span>
                 <span th:text="${product.price}" th:remove="tag">$980.00</span>
