@@ -66,7 +66,6 @@ public class Client {
         this.roles = roles;
     }
 
-
     @Override
     public String toString() {
         return "Client{" +

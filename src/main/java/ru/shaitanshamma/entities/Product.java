@@ -5,7 +5,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -25,9 +27,17 @@ public class Product {
     @NotNull
     private String about;
 
-    @Column(name = "category_fld")
-    @NotNull
-    private Long category;
+//    @JoinColumn(name = "category_fld")
+//    private Long category;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "products_categories_tbl",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
+
+    @ManyToOne(optional = false)
+    private Brand brand;
 
     @Column(name = "price_fld")
     @NotNull
@@ -37,11 +47,10 @@ public class Product {
     @NotNull
     private Long quantity;
 
-    @Column(name = "brand_fld")
-    @NotNull
-    private Long brand;
+//    @Column(name = "comment_fld")
+//    private Long comment;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(name = "products_pictures_tbl",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "picture_id"))
@@ -53,7 +62,6 @@ public class Product {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", about='" + about + '\'' +
-                ", category=" + category +
                 ", price=" + price +
                 ", quantity=" + quantity +
                 '}';

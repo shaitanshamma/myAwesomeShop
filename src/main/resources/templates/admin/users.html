@@ -25,7 +25,6 @@
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Username</th>
                         <th>First name</th>
                         <th>Last name</th>
                         <th>Phone</th>
@@ -35,7 +34,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="usr : ${users}">
+                    <tr th:each="usr : ${users}" >
                         <td th:text="${usr.id}"></td>
                         <td th:text="${usr.name}">Admin</td>
                         <td th:text="${usr.lastName}"></td>

@@ -13,6 +13,7 @@ import ru.shaitanshamma.entities.dot.ProductDot;
 import ru.shaitanshamma.repositories.BrandRepository;
 import ru.shaitanshamma.repositories.CategoryRepository;
 import ru.shaitanshamma.services.ProductService;
+import ru.shaitanshamma.services.impl.ProductServiceImpl;
 
 @Controller
 public class AdminProductsController {
@@ -68,18 +69,18 @@ public class AdminProductsController {
     }
 
     @PostMapping("/admin/product")
-    public String adminUpsertProduct(Model model, RedirectAttributes redirectAttributes, ProductDot product) {
+    public String adminUpsertProduct(Model model, RedirectAttributes redirectAttributes, ProductDot productDot) {
         model.addAttribute("activePage", "Products");
 
         try {
-            productService.save(product);
+            productService.save(productDot);
         } catch (Exception ex) {
             logger.error("Problem with creating or updating product", ex);
             redirectAttributes.addFlashAttribute("error", true);
-            if (product.getId() == null) {
+            if (productDot.getId() == null) {
                 return "redirect:/admin/product/create";
             }
-            return "redirect:/admin/product/" + product.getId() + "/edit";
+            return "redirect:/admin/product/" + productDot.getId() + "/edit";
         }
         return "redirect:/admin/products";
     }

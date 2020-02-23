@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,6 +19,9 @@ public class Category {
 
     @Column(name = "title_fld")
     private String title;
+
+    @ManyToMany(mappedBy = "categories")
+    private List<Product> products;
 
     @Override
     public String toString() {

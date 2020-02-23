@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.shaitanshamma.entities.Category;
 import ru.shaitanshamma.repositories.CategoryRepository;
+import ru.shaitanshamma.repositories.RoleRepository;
 import ru.shaitanshamma.services.system.SystemUser;
 
 import javax.validation.Valid;
@@ -17,17 +18,26 @@ import javax.validation.Valid;
 public class AdminCategoriesController {
 
     private final CategoryRepository categoryRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
-    public AdminCategoriesController(CategoryRepository categoryRepository) {
+    public AdminCategoriesController(CategoryRepository categoryRepository, RoleRepository roleRepository) {
         this.categoryRepository = categoryRepository;
+        this.roleRepository =roleRepository;
     }
 
     @GetMapping("/admin/categories")
     public String adminCategoriesPage(Model model) {
         model.addAttribute("activePage", "Categories");
-        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("categories", categoryRepository.getAllCategoryRepr());
         return "admin/categories";
+    }
+
+    @GetMapping("/admin/roles")
+    public String adminRolesPage(Model model) {
+        model.addAttribute("activePage", "Roles");
+        model.addAttribute("roles", roleRepository.findAll());
+        return "admin/roles";
     }
 
     @GetMapping("/admin/category/{id}/edit")

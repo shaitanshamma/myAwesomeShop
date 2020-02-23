@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,6 +22,12 @@ public class Brand {
     @Column(name = "title_fld")
     @NotNull
     private String title;
+
+    @OneToMany(
+            mappedBy = "brand",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
+    private List<Product> products;
 
     @Override
     public String toString() {

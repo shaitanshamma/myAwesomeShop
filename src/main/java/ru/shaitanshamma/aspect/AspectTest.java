@@ -13,11 +13,11 @@ import java.util.logging.Logger;
 public class AspectTest {
     private Logger logger = Logger.getLogger(AspectTest.class.getName());
 
-    @AfterReturning(pointcut = "execution(* ru.shaitanshamma.services.impl.*.*(..))", returning = "result")
-    public void logAfterReturning(JoinPoint joinPoint, Object result){
-        String methodName = joinPoint.getSignature().getName();
-        logger.info("method " + methodName + "return value: " + result.toString());
-    }
+//    @AfterReturning(pointcut = "execution(* ru.shaitanshamma.services.impl.*.*(..))", returning = "result")
+//    public void logAfterReturning(JoinPoint joinPoint, Object result){
+//        String methodName = joinPoint.getSignature().getName();
+//        logger.info("method " + methodName + "return value: " + result.toString());
+//    }
     @Before("execution(* ru.shaitanshamma.controlers.*.*(..))")
     public void before(JoinPoint joinPoint){
         logger.info("Call of {} " + joinPoint.getSignature().getName());

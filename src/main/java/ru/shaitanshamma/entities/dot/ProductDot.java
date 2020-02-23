@@ -1,11 +1,16 @@
 package ru.shaitanshamma.entities.dot;
 
 import org.springframework.web.multipart.MultipartFile;
+import ru.shaitanshamma.entities.Brand;
 import ru.shaitanshamma.entities.Category;
 import ru.shaitanshamma.entities.Picture;
 import ru.shaitanshamma.entities.Product;
+import ru.shaitanshamma.repositories.PictureRepository;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ProductDot {
@@ -16,21 +21,28 @@ public class ProductDot {
 
     private String about;
 
-    private Long category;
+    private Set<Category> categories;
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
 
     private Long price;
 
     private Long quantity;
 
-    private Long brand;
+    private Brand brand;
 
-    private List<Picture> pictures;
+//    private Long comment;
+
+    private List<PictureDot> pictures;
 
     private MultipartFile[] newPictures;
 
-    public List<Picture> getPictures() {
-        return pictures;
-    }
 
     public MultipartFile[] getNewPictures() {
         return newPictures;
@@ -40,16 +52,27 @@ public class ProductDot {
     this.id = product.getId();
     this.title = product.getTitle();
     this.about = product.getAbout();
-    this.category = product.getCategory();
+    this.categories = product.getCategories();
     this.price = product.getPrice();
     this.quantity = product.getQuantity();
     this.brand = product.getBrand();
-    this.pictures = product.getPictures();
+    this.pictures = product.getPictures().stream()
+                .map(PictureDot::new)
+                .collect(Collectors.toList());
+//    this.comment = product.getComment();
     }
 
     public ProductDot() {
 
     }
+//
+//    public Long getComment() {
+//        return comment;
+//    }
+//
+//    public void setComment(Long comment) {
+//        this.comment = comment;
+//    }
 
     public Long getId() {
         return id;
@@ -75,14 +98,6 @@ public class ProductDot {
         this.about = about;
     }
 
-    public Long getCategory() {
-        return category;
-    }
-
-    public void setCategory(Long category) {
-        this.category = category;
-    }
-
     public Long getPrice() {
         return price;
     }
@@ -99,19 +114,44 @@ public class ProductDot {
         this.quantity = quantity;
     }
 
-    public Long getBrand() {
+    public Brand getBrand() {
         return brand;
     }
 
-    public void setBrand(Long brand) {
+    public void setBrand(Brand brand) {
         this.brand = brand;
     }
 
-//    public String getCategoriesAsString() {
-//        return getCategory().
-////                .stream()
-////                .map(Category::getTitle)
-////                .collect(Collectors.joining(", "));
-//    }
+    public List<PictureDot> getPictures() {
+        return pictures;
+    }
 
+    public void setPictures(List<PictureDot> pictures) {
+        this.pictures = pictures;
+    }
+
+    public void setNewPictures(MultipartFile[] newPictures) {
+        this.newPictures = newPictures;
+    }
+
+    public String getCategoriesAsString() {
+        return getCategories()
+                .stream()
+                .map(Category::getTitle)
+                .collect(Collectors.joining(", "));
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductDot that = (ProductDot) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
