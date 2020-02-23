@@ -1092,6 +1092,12 @@ textarea.input {
   top: 0px;
   width: 60px;
 }
+.product-small {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 30px;
+}
 
 .product-widget .product-img>img {
   width: 100%;
