@@ -11,6 +11,8 @@ public class PersonalUserInfo implements Serializable {
     @NotBlank
     private String lastName;
 
+    private Integer phone;
+
     @NotBlank
     private String birthday;
 
@@ -39,5 +41,13 @@ public class PersonalUserInfo implements Serializable {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public Integer getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Integer phone) {
+        this.phone = phone;
     }
 }

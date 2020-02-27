@@ -41,7 +41,7 @@ public class ClientServiceImpl implements ClientService {
     public SystemUser findByName(String name) {
         Client client = clientRepository.findOneByName(name);
         return new SystemUser(client.getName(), client.getLastName(), client.getPassword(),
-                client.getPassword(), client.getEmail(), client.getPhone(), client.getRoles());
+                client.getPassword(), client.getEmail(), client.getPhone());
     }
 
     @Override
@@ -57,12 +57,16 @@ public class ClientServiceImpl implements ClientService {
         client.setLastName(systemUser.getLastName());
         client.setEmail(systemUser.getEmail());
         client.setLogin(systemUser.getLogin());
-        client.setName(systemUser.getName());
         client.setPhone(systemUser.getPhone());
         client.setRoles(new HashSet<>(Collections.singletonList(roleRepository.findOneByTitle("ROLE_CLIENT"))));
        // client.setRoles(new HashSet<>(Collections.singletonList(roleRepository.findOneByTitle("ROLE_ADMIN"))));
         clientRepository.save(client);
         return true;
+    }
+
+    @Override
+    public boolean existsUserByEmail(String email) {
+        return clientRepository.existsUserByEmail(email);
     }
 
     @Override

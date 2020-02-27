@@ -4,8 +4,8 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
-    <var name="basicInfo" class="ru.geekmarket.flow.register.BasicUserInfo" />
-    <var name="personalInfo" class="ru.geekmarket.flow.register.PersonalUserInfo" />
+    <var name="basicInfo" class="ru.shaitanshamma.flow.register.BasicUserInfo" />
+    <var name="personalInfo" class="ru.shaitanshamma.flow.register.PersonalUserInfo" />
 
     <input name="email" required="true"/>
 

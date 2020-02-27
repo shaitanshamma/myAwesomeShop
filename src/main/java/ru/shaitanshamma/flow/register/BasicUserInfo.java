@@ -15,6 +15,9 @@ public class BasicUserInfo implements Serializable {
     private String password;
 
     @NotBlank
+    private String login;
+
+    @NotBlank
     private String confirmPassword;
 
     public BasicUserInfo() {
@@ -50,5 +53,13 @@ public class BasicUserInfo implements Serializable {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 }

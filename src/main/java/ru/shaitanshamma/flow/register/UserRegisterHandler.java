@@ -16,11 +16,11 @@ public class UserRegisterHandler {
     private static final String FAILURE = "failure";
     private static final String SUCCESS = "success";
 
-    private final ClientService userService;
+    private final ClientService clientService;
 
     @Autowired
-    public UserRegisterHandler(ClientService userService) {
-        this.userService = userService;
+    public UserRegisterHandler(ClientService clientService) {
+        this.clientService = clientService;
     }
 
     public UserRegisterModel init() {
@@ -59,8 +59,10 @@ public class UserRegisterHandler {
                     urm.getBasicUserInfo().getPassword(),
                     urm.getPersonalUserInfo().getFirstName(),
                     urm.getPersonalUserInfo().getLastName(),
-                    urm.getBasicUserInfo().getEmail());
-            userService.save(systemUser);
+                    urm.getBasicUserInfo().getEmail(),
+                    urm.getPersonalUserInfo().getPhone());
+
+            clientService.save(systemUser);
         } catch (Exception ex) {
             logger.error("", ex);
             error.addMessage(new MessageBuilder()

@@ -14,6 +14,8 @@ public interface ClientService extends UserDetailsService {
 
     boolean save(SystemUser systemUser);
 
+    boolean existsUserByEmail(String email);
+
     List<SystemUser> findAll();
 
     void delete(Long id);

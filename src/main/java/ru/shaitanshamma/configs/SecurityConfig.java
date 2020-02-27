@@ -66,7 +66,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public ClientService clientService(ClientRepository clientRepository, RoleRepository roleRepository,
                                        BCryptPasswordEncoder passwordEncoder) {
-        System.out.println(passwordEncoder.encode("admin"));
         return new ClientServiceImpl(clientRepository, roleRepository, passwordEncoder);
     }
 }

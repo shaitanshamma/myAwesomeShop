@@ -53,6 +53,9 @@
                         <input class="input" type="text" th:field="*{basicUserInfo.username}" disabled>
                     </div>
                     <div class="form-group">
+                        <input class="input" type="text" th:field="*{basicUserInfo.login}" disabled>
+                    </div>
+                    <div class="form-group">
                         <input class="input" type="text" th:field="*{personalUserInfo.firstName}" disabled>
                     </div>
                     <div class="form-group">
@@ -60,6 +63,9 @@
                     </div>
                     <div class="form-group">
                         <input class="input" type="date" th:field="*{personalUserInfo.birthday}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" type="text" th:field="*{personalUserInfo.phone}" disabled>
                     </div>
                     <div class="form-group">
                         <button class="primary-btn order-submit" type="submit">Submit</button>

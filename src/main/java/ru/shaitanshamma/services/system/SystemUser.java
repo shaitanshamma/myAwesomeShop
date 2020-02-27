@@ -24,18 +24,16 @@ public class SystemUser {
 
     private Set<Role> roles;
 
-    public SystemUser(String username, String password, String firstName, String lastName, String email) {
+// 2
 
-    }
-
-    public SystemUser(String name, String lastName, String login, String password, String email, int phone, Set<Role> roles) {
+    public SystemUser(String name, String lastName, String login, String password, String email, int phone) {
         this.name = name;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
         this.email = email;
         this.phone = phone;
-        this.roles = roles;
+
     }
 
     public SystemUser(Client client) {
