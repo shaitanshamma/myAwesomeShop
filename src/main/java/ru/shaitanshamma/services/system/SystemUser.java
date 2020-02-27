@@ -24,7 +24,7 @@ public class SystemUser {
 
     private Set<Role> roles;
 
-    public SystemUser() {
+    public SystemUser(String username, String password, String firstName, String lastName, String email) {
 
     }
 
