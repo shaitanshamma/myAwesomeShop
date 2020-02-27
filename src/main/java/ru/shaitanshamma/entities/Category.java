@@ -1,9 +1,15 @@
 package ru.shaitanshamma.entities;
 
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "category_tbl")
 public class Category {
     @Id
@@ -14,24 +20,8 @@ public class Category {
     @Column(name = "title_fld")
     private String title;
 
-    public Category() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    @ManyToMany(mappedBy = "categories")
+    private List<Product> products;
 
     @Override
     public String toString() {

@@ -1,11 +1,16 @@
 package ru.shaitanshamma.entities;
 
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "cart_tbl")
 public class Cart {
 
@@ -36,49 +41,6 @@ public class Cart {
 
     @Column(name = "total_price_fld")
     private Double totalPrice;
-
-    public Cart() {
-    }
-
-    public Long getIdClient() {
-        return idClient;
-    }
-
-    public void setIdClient(Long idClient) {
-        this.idClient = idClient;
-    }
-
-    public Long getIdProduct() {
-        return idProduct;
-    }
-
-    public void setIdProduct(Long idProduct) {
-        this.idProduct = idProduct;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public Double getItemPrice() {
-        return itemPrice;
-    }
-
-    public void setItemPrice(Double itemPrice) {
-        this.itemPrice = itemPrice;
-    }
-
-    public Double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 
     @Override
     public String toString() {

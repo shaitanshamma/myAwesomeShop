@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "pictures_data")
+@Table(name = "pictures_data_tbl")
 public class PictureData {
 
     @Id
@@ -13,7 +13,7 @@ public class PictureData {
     private Long id;
 
     @Lob
-    @Column(name = "data_fld")
+    @Column(name = "data_fld", nullable = false, columnDefinition="MEDIUMBLOB")
     private byte[] data;
 
     public PictureData() {

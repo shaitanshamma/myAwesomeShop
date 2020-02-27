@@ -1,7 +1,5 @@
 package ru.shaitanshamma.services;
 
-
-import org.springframework.stereotype.Service;
 import ru.shaitanshamma.entities.dot.ProductDot;
 
 import java.io.IOException;
@@ -15,5 +13,5 @@ public interface ProductService {
 
     void deleteById(Long id);
 
-    void save(ProductDot product) throws IOException;
+    void save(ProductDot productDot) throws IOException;
 }

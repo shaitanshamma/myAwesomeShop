@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.shaitanshamma.entities.Client;
 import ru.shaitanshamma.repositories.RoleRepository;
 import ru.shaitanshamma.services.ClientService;
@@ -38,6 +39,7 @@ public class AdminUserController {
     public String adminUsersPage(Model model) {
         model.addAttribute("activePage", "Users");
         model.addAttribute("users", clientService.findAll());
+        model.addAttribute("roles", roleRepository.findAll());
         return "admin/users";
     }
 
@@ -77,9 +79,4 @@ public class AdminUserController {
         return "admin/users";
     }
 
-    @GetMapping("/admin/roles")
-    public String adminRolesPage(Model model) {
-        model.addAttribute("activePage", "Roles");
-        return "admin/index";
-    }
 }
