@@ -18,23 +18,23 @@ public class AspectTest {
 //        String methodName = joinPoint.getSignature().getName();
 //        logger.info("method " + methodName + "return value: " + result.toString());
 //    }
-//    @Before("execution(* ru.shaitanshamma.controlers.*.*(..))")
-//    public void before(JoinPoint joinPoint){
-//        logger.info("Call of {} " + joinPoint.getSignature().getName());
-//    }
-//
-//    @After("execution(* ru.shaitanshamma.services.impl.*.*(..))")
-//    public void after(JoinPoint joinPoint){
-//        logger.info("Call of {} " + joinPoint.getSignature().getName());
-//    }
-//
-//    @Around("@annotation(ExecutionTime)")
-//    public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
-//        long start = System.currentTimeMillis();
-//        Object proceed = joinPoint.proceed();
-//        long executionTime = System.currentTimeMillis() - start;
-//        logger.log(Level.INFO, joinPoint.getSignature() + " выполнен за " + executionTime + "мс");
-//        return proceed;
-//    }
+    @Before("execution(* ru.shaitanshamma.controlers.*.*(..))")
+    public void before(JoinPoint joinPoint){
+        logger.info("Call of {} " + joinPoint.getSignature().getName());
+    }
+
+    @After("execution(* ru.shaitanshamma.services.impl.*.*(..))")
+    public void after(JoinPoint joinPoint){
+        logger.info("Call of {} " + joinPoint.getSignature().getName());
+    }
+
+    @Around("@annotation(ExecutionTime)")
+    public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+        long start = System.currentTimeMillis();
+        Object proceed = joinPoint.proceed();
+        long executionTime = System.currentTimeMillis() - start;
+        logger.log(Level.INFO, joinPoint.getSignature() + " выполнен за " + executionTime + "мс");
+        return proceed;
+    }
 
 }
