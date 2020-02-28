@@ -51,7 +51,7 @@ public class MainController {
 
     @GetMapping("/checkout")
     public String checkoutPage() {
-        return "checkout";
+        return "flows/checkout/order-basic";
     }
 
     @GetMapping("/product/{id}")

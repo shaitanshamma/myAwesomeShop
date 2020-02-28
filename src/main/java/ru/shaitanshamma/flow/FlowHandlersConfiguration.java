@@ -16,7 +16,7 @@ public class FlowHandlersConfiguration {
     }
 
     @Bean
-    public OrderHandler orderHandler(OrderAddressService addressService) {
-        return new OrderHandler(addressService);
+    public OrderHandler orderHandler(OrderAddressService addressService, ClientService clientService) {
+        return new OrderHandler(addressService, clientService);
     }
 }

@@ -1,9 +1,26 @@
 package ru.shaitanshamma.flow.order;
 
-import lombok.Data;
+import java.io.Serializable;
 
-@Data
-public class OrderModel {
-    private AdressInfo adressInfo;
+
+public class OrderModel implements Serializable {
+    private AddressInfo addressInfo;
     private BasicOrderInfo basicOrderInfo;
+
+    public AddressInfo getAddressInfo() {
+        return addressInfo;
+    }
+
+    public void setAddressInfo(AddressInfo addressInfo) {
+        this.addressInfo = addressInfo;
+    }
+
+    public BasicOrderInfo getBasicOrderInfo() {
+        return basicOrderInfo;
+    }
+
+    public void setBasicOrderInfo(BasicOrderInfo basicOrderInfo) {
+        this.basicOrderInfo = basicOrderInfo;
+    }
 }
+
