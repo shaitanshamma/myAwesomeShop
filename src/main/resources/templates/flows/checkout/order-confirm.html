@@ -21,8 +21,8 @@
                 <h3 class="breadcrumb-header">New user personal information</h3>
                 <ul class="breadcrumb-tree">
                     <li><a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_home'}">Home</a></li>
-                    <li><a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_basic'}">Password</a></li>
-                    <li><a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_personal'}">Personal information</a></li>
+                    <li><a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_basic'}">Personal information</a></li>
+                    <li><a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_personal'}">Order information</a></li>
                     <li class="active">Confirm and submit</li>
                 </ul>
             </div>
@@ -46,7 +46,7 @@
                       method="POST" enctype="multipart/form-data">
 
                     <div class="section-title">
-                        <h3 class="title">Check and submit registration info</h3>
+                        <h3 class="title">Check and submit order info</h3>
                     </div>
                     <div class="form-group">
                         <input class="input" type="text" th:field="*{basicOrderInfo.firstName}" disabled>

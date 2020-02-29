@@ -58,7 +58,7 @@
     </action-state>
 
     <!-- end state -->
-    <end-state id="success" view="flows/register/new-user-success" />
+    <end-state id="success" view="flows/checkout/checkout" />
     <end-state id="home" view="externalRedirect:contextRelative:/" />
 
     <!-- Global Transition -->

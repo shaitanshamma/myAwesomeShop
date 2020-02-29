@@ -47,7 +47,7 @@ public class OrderHandler {
         orderAdress.setStreet(orderModel.getAddressInfo().getStreet());
         orderModel.getBasicOrderInfo().getFirstName();
         Optional<SystemUser> client = clientService.findByName(orderModel.getBasicOrderInfo().getFirstName());
-        orderAdress.setId(client.get().getId());
+        orderAdress.setIdClient(client.get().getId());
         orderService.save(orderAdress);
     }
 }
