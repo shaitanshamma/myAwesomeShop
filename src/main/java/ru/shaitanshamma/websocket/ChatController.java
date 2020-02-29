@@ -31,5 +31,4 @@ public class ChatController {
     public void sendMessage() {
         template.convertAndSend("/chat_out/receive_message", new ChatMessage("Server", "Test message"));
     }
-
 }
