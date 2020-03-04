@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+    <var name="basicOrderInfo" class="ru.shaitanshamma.flow.order.BasicOrderInfo" />
+    <var name="addressInfo" class="ru.shaitanshamma.flow.order.AddressInfo" />
+
+<!--    <input name="email" required="true"/>-->
+
+    <on-start>
+        <evaluate expression="orderHandler.init()"
+                  result="flowScope.orderModel" />
+
+<!--        <evaluate expression="basicInfo.email = email" />-->
+    </on-start>
+
+    <view-state id="basic" view="flows/checkout/order-basic" model="basicOrderInfo">
+        <transition on="personal" to="personal" />
+        <on-exit>
+<!--            <evaluate expression="userRegisterHandler.addBasicUserInfo(flowScope.userRegisterModel, basicInfo)" />-->
+            <evaluate expression="orderHandler.addBasicOrderInfo(flowScope.orderModel, basicOrderInfo)" />
+        </on-exit>
+    </view-state>
+
+<!--    <action-state id="validateBasicUserInfo">-->
+<!--        <evaluate expression="userRegisterHandler.validateBasicUserInfo(basicInfo, messageContext)" />-->
+<!--        <transition on="success" to="personal" />-->
+<!--        <transition on="failure" to="basic" />-->
+<!--    </action-state>-->
+
+    <view-state id="personal" view="flows/checkout/order-address" model="addressInfo">
+        <transition on="basic" to="basic" />
+        <transition on="confirm" to="confirm" />
+        <transition on="personal" to="personal" />
+        <on-exit>
+            <evaluate expression="orderHandler.addAdressInfo(flowScope.orderModel, addressInfo)" />
+        </on-exit>
+    </view-state>
+
+<!--    <action-state id="validatePersonal">-->
+<!--        <evaluate expression="userRegisterHandler.validatePersonalUserInfo(personalInfo, messageContext)" />-->
+<!--        <transition on="success" to="confirm" />-->
+<!--        <transition on="failure" to="personal" />-->
+<!--    </action-state>-->
+
+    <view-state id="confirm" view="flows/checkout/order-confirm" model="flowScope.orderModel">
+        <transition on="personal" to="personal" />
+        <transition on="basic" to="basic" />
+        <transition on="submit" to="submit" />
+    </view-state>
+
+    <action-state id="submit">
+        <evaluate expression="orderHandler.save(flowScope.orderModel)" />
+        <transition on="success" to="success" />
+        <transition on="failure" to="confirm" />
+    </action-state>
+
+    <!-- end state -->
+    <end-state id="success" view="flows/checkout/checkout" />
+    <end-state id="home" view="externalRedirect:contextRelative:/" />
+
+    <!-- Global Transition -->
+    <global-transitions>
+        <transition on="home" to="home" validate="false" />
+    </global-transitions>
+</flow>

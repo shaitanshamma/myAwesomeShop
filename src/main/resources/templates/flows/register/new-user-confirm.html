@@ -18,10 +18,12 @@
         <!-- row -->
         <div class="row">
             <div class="col-md-12">
-                <h3 class="breadcrumb-header">Login / Register Account</h3>
+                <h3 class="breadcrumb-header">New user personal information</h3>
                 <ul class="breadcrumb-tree">
-                    <li><a href="#">Home</a></li>
-                    <li class="active">Login/Register</li>
+                    <li><a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_home'}">Home</a></li>
+                    <li><a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_basic'}">Password</a></li>
+                    <li><a th:href="@{'~' + ${flowExecutionUrl} + '&_eventId_personal'}">Personal information</a></li>
+                    <li class="active">Confirm and submit</li>
                 </ul>
             </div>
         </div>
@@ -38,40 +40,35 @@
         <!-- row -->
         <div class="row">
             <div class="col-md-6 login-border">
-                <!-- Login form -->
-                <form class="login-form" th:action="@{/authenticateTheUser}" method="POST">
-                    <div class="section-title">
-                        <h3 class="title">Login</h3>
-                    </div>
-                    <div class="form-group">
-                        <input class="input" type="text" name="username" placeholder="User name">
-                        <small class="form-text text-danger" th:if="${#httpServletRequest.getParameter('error')}"
-                               th:text="${'Inccorect username or password'}"></small>
-                    </div>
-                    <div class="form-group">
-                        <input class="input" type="password" name="password" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <button class="primary-btn order-submit" type="submit" name="submit">Login</button>
-                    </div>
+                <form class="login-form" th:object="${userRegisterModel}" th:action="@{'~' + ${flowExecutionUrl} + '&_eventId_submit'}"
+                      method="POST" enctype="multipart/form-data">
 
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-                </form>
-            </div>
-
-            <div class="col-md-6">
-                <!-- Register form -->
-                <form class="login-form" th:object="${signupForm}" th:action="@{/signup}" method="POST">
                     <div class="section-title">
-                        <h3 class="title">Register</h3>
+                        <h3 class="title">Check and submit registration info</h3>
                     </div>
                     <div class="form-group">
-                        <input class="input" type="email" th:field="*{email}" placeholder="Email address">
-                        <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}"
-                               th:errors="*{email}"></small>
+                        <input class="input" type="text" th:field="*{basicUserInfo.email}" disabled>
                     </div>
                     <div class="form-group">
-                        <button class="primary-btn order-submit" type="submit" name="submit">Register</button>
+                        <input class="input" type="text" th:field="*{basicUserInfo.username}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" type="text" th:field="*{basicUserInfo.login}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" type="text" th:field="*{personalUserInfo.firstName}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" type="text" th:field="*{personalUserInfo.lastName}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" type="date" th:field="*{personalUserInfo.birthday}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" type="text" th:field="*{personalUserInfo.phone}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <button class="primary-btn order-submit" type="submit">Submit</button>
                     </div>
                 </form>
             </div>

@@ -11,10 +11,14 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Table(name = "order_adress_tbl")
 public class OrderAdress {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_client")
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "id_client")
+    private Long idClient;
 
     @Column(name = "country_fld")
     @NotNull
@@ -42,6 +46,11 @@ public class OrderAdress {
     @Column(name = "building_fld")
     @NotNull
     private int building;
+
+//    @ManyToOne()
+//    @JoinColumn(name ="id_client", insertable = false, updatable = false)
+//    private Client client;
+
 
     @Override
     public String toString() {

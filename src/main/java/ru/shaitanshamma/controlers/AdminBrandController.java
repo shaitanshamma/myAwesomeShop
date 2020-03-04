@@ -59,4 +59,10 @@ public class AdminBrandController {
         brandRepository.save(brand);
         return "redirect:/admin/brands";
     }
+
+    @GetMapping("/admin/message")
+    public String adminMessagePage(Model model) {
+        model.addAttribute("activePage", "Message");
+        return "admin/message";
+    }
 }

@@ -5,17 +5,20 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.shaitanshamma.services.system.SystemUser;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClientService extends UserDetailsService {
 
-    SystemUser findById(Long id);
+    Optional<SystemUser> findById(Long id);
 
-    SystemUser findByName(String name);
+    Optional<SystemUser> findByName(String username);
+
+    boolean existsUserByEmail(String email);
 
     boolean save(SystemUser systemUser);
 
-    List<SystemUser> findAll();
-
     void delete(Long id);
+
+    List<SystemUser> findAll();
 
 }

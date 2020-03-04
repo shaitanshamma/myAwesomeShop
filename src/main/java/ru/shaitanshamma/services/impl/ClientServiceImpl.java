@@ -1,6 +1,9 @@
 package ru.shaitanshamma.services.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +21,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ClientServiceImpl implements ClientService {
+    private final Logger logger = LoggerFactory.getLogger(ClientServiceImpl.class);
 
     private ClientRepository clientRepository;
     private RoleRepository roleRepository;
@@ -31,17 +35,14 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    @Transactional
-    public SystemUser findById(Long id) {
-        return new SystemUser(clientRepository.findById(id).get());
+    public Optional<SystemUser> findById(Long id) {
+        return clientRepository.findById(id).map(SystemUser::new);
     }
 
     @Override
     @Transactional
-    public SystemUser findByName(String name) {
-        Client client = clientRepository.findOneByName(name);
-        return new SystemUser(client.getName(), client.getLastName(), client.getPassword(),
-                client.getPassword(), client.getEmail(), client.getPhone(), client.getRoles());
+    public Optional<SystemUser> findByName(String username) {
+        return clientRepository.findOneByName(username).map(SystemUser::new);
     }
 
     @Override
@@ -57,12 +58,16 @@ public class ClientServiceImpl implements ClientService {
         client.setLastName(systemUser.getLastName());
         client.setEmail(systemUser.getEmail());
         client.setLogin(systemUser.getLogin());
-        client.setName(systemUser.getName());
         client.setPhone(systemUser.getPhone());
         client.setRoles(new HashSet<>(Collections.singletonList(roleRepository.findOneByTitle("ROLE_CLIENT"))));
        // client.setRoles(new HashSet<>(Collections.singletonList(roleRepository.findOneByTitle("ROLE_ADMIN"))));
         clientRepository.save(client);
         return true;
+    }
+
+    @Override
+    public boolean existsUserByEmail(String email) {
+        return clientRepository.existsUserByEmail(email);
     }
 
     @Override
@@ -80,12 +85,17 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        SystemUser user = findByName(userName);
-        if (user == null) {
+        Optional<SystemUser> user = findByName(userName);
+        if (!user.isPresent()) {
             throw new UsernameNotFoundException("Invalid username or password");
         }
-        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(),
-                mapRolesToAuthorities(user.getRoles()));
+        try {
+            return new org.springframework.security.core.userdetails.User(user.get().getName(), user.get().getPassword(),
+                    mapRolesToAuthorities(user.get().getRoles()));
+        } catch (Exception ex) {
+            logger.error("", ex);
+            throw new BadCredentialsException("Internal error. Try again latter.");
+        }
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {

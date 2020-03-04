@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -47,6 +48,9 @@ public class Client {
             joinColumns = @JoinColumn(name = "id_client"),
             inverseJoinColumns = @JoinColumn(name = "id_role"))
     private Set<Role> roles;
+
+//    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "client", fetch = FetchType.EAGER)
+//    private List<OrderAdress> orderAdresses;
 
     public Client() {
         this.roles = new HashSet<>();
