@@ -2,7 +2,9 @@ package ru.shaitanshamma.entities.dot;
 
 import ru.shaitanshamma.entities.Picture;
 
-public class PictureDot {
+import java.io.Serializable;
+
+public class PictureDot implements Serializable {
 
     private Long id;
 

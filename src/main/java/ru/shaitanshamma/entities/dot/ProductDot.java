@@ -3,18 +3,15 @@ package ru.shaitanshamma.entities.dot;
 import org.springframework.web.multipart.MultipartFile;
 import ru.shaitanshamma.entities.Brand;
 import ru.shaitanshamma.entities.Category;
-import ru.shaitanshamma.entities.Picture;
 import ru.shaitanshamma.entities.Product;
-import ru.shaitanshamma.repositories.PictureRepository;
-
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ProductDot {
+public class ProductDot implements Serializable{
 
     private Long id;
 

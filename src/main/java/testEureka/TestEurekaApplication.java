@@ -1,4 +1,4 @@
-package ru.shaitanshamma;
+package testEureka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class MyAwesomeShopApplication {
+public class TestEurekaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MyAwesomeShopApplication.class, args);
+		SpringApplication.run(TestEurekaApplication.class, args);
 	}
 
 }
