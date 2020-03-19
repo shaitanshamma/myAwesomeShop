@@ -3,6 +3,7 @@ package ru.shaitanshamma.flow.order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.shaitanshamma.configs.MailSendingConfig;
 import ru.shaitanshamma.entities.Client;
 import ru.shaitanshamma.entities.OrderAdress;
 import ru.shaitanshamma.services.ClientService;
@@ -23,6 +24,8 @@ public class OrderHandler {
         this.orderService = orderService;
         this.clientService = clientService;
     }
+    @Autowired
+    public MailSendingConfig mailSendingConfig;
 
     public OrderModel init(){
         return new OrderModel();
@@ -49,5 +52,6 @@ public class OrderHandler {
         Optional<SystemUser> client = clientService.findByName(orderModel.getBasicOrderInfo().getFirstName());
         orderAdress.setIdClient(client.get().getId());
         orderService.save(orderAdress);
+        mailSendingConfig.sendSimpleMessage(client.get().getEmail(),"New order", "You create new order!");
     }
 }
