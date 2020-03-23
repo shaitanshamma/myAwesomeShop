@@ -8,6 +8,8 @@ import ru.shaitanshamma.entities.Client;
 import ru.shaitanshamma.entities.OrderAdress;
 import ru.shaitanshamma.services.ClientService;
 import ru.shaitanshamma.services.OrderAddressService;
+import ru.shaitanshamma.services.OrderService;
+import ru.shaitanshamma.services.impl.CartServiceImpl;
 import ru.shaitanshamma.services.system.SystemUser;
 
 import java.util.Optional;
@@ -16,13 +18,17 @@ import java.util.Optional;
 public class OrderHandler {
     private static final Logger logger = LoggerFactory.getLogger(OrderHandler.class);
 
-    private OrderAddressService orderService;
+    private OrderAddressService orderAddressService;
     private ClientService clientService;
+    private OrderService orderService;
 
     @Autowired
-    public OrderHandler(OrderAddressService orderService, ClientService clientService){
-        this.orderService = orderService;
+    public OrderHandler(OrderAddressService orderAddressService,
+                        ClientService clientService,
+                        OrderService orderService){
+        this.orderAddressService = orderAddressService;
         this.clientService = clientService;
+        this.orderService = orderService;
     }
     @Autowired
     public MailSendingConfig mailSendingConfig;
@@ -49,9 +55,11 @@ public class OrderHandler {
         orderAdress.setBuilding(orderModel.getAddressInfo().getBuilding());
         orderAdress.setStreet(orderModel.getAddressInfo().getStreet());
         orderModel.getBasicOrderInfo().getFirstName();
-        Optional<SystemUser> client = clientService.findByName(orderModel.getBasicOrderInfo().getFirstName());
-        orderAdress.setIdClient(client.get().getId());
-        orderService.save(orderAdress);
-        mailSendingConfig.sendSimpleMessage(client.get().getEmail(),"New order", "You create new order!");
+        Optional<SystemUser> user = clientService.findByName(orderModel.getBasicOrderInfo().getFirstName());
+        Optional<Client> client = clientService.findClientByName(orderModel.getBasicOrderInfo().getFirstName());
+        orderAdress.setIdClient(user.get().getId());
+        orderAddressService.save(orderAdress);
+        orderService.makeOrder(client.get());
+        mailSendingConfig.sendSimpleMessage(user.get().getEmail(),"New order", "You create new order!");
     }
 }

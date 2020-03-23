@@ -2,6 +2,7 @@ package ru.shaitanshamma.services;
 
 
 import org.springframework.security.core.userdetails.UserDetailsService;
+import ru.shaitanshamma.entities.Client;
 import ru.shaitanshamma.services.system.SystemUser;
 
 import java.util.List;
@@ -20,5 +21,7 @@ public interface ClientService extends UserDetailsService {
     void delete(Long id);
 
     List<SystemUser> findAll();
+
+    Optional<Client> findClientByName(String name);
 
 }

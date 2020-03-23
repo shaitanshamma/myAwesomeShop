@@ -7,8 +7,10 @@ import ru.shaitanshamma.entities.Cart;
 import ru.shaitanshamma.entities.Client;
 import ru.shaitanshamma.entities.Order;
 import ru.shaitanshamma.repositories.OrderRepository;
+import ru.shaitanshamma.services.system.SystemUser;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -21,11 +23,9 @@ public class OrderService {
     }
 
     @Transactional
-    public Order makeOrder(Cart cart, Client client){
-        Order order = new Order();
-        order.setId(0L);
-        order.setId(client.getId());
-        return order;
+    public Order makeOrder(Client client){
+        Order order = new Order(client);
+        return orderRepository.save(order);
     }
 
 }
