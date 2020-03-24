@@ -21,14 +21,16 @@ public class OrderHandler {
     private OrderAddressService orderAddressService;
     private ClientService clientService;
     private OrderService orderService;
+    private CartServiceImpl cartService;
 
     @Autowired
     public OrderHandler(OrderAddressService orderAddressService,
                         ClientService clientService,
-                        OrderService orderService){
+                        OrderService orderService, CartServiceImpl cartService){
         this.orderAddressService = orderAddressService;
         this.clientService = clientService;
         this.orderService = orderService;
+        this.cartService = cartService;
     }
     @Autowired
     public MailSendingConfig mailSendingConfig;
@@ -58,6 +60,7 @@ public class OrderHandler {
         Optional<SystemUser> user = clientService.findByName(orderModel.getBasicOrderInfo().getFirstName());
         Optional<Client> client = clientService.findClientByName(orderModel.getBasicOrderInfo().getFirstName());
         orderAdress.setIdClient(user.get().getId());
+        //cartService.getCartItems().values().stream().forEach((i -> orderAdress.addItem(i)));
         orderAddressService.save(orderAdress);
         orderService.makeOrder(client.get());
         mailSendingConfig.sendSimpleMessage(user.get().getEmail(),"New order", "You create new order!");
