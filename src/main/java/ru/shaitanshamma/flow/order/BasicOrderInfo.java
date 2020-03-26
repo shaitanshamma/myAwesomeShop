@@ -17,7 +17,6 @@ public class BasicOrderInfo implements Serializable {
     @NotBlank
     private String email;
 
-   // @NotBlank
     private Integer phone;
 
     public BasicOrderInfo() {

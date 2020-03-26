@@ -35,8 +35,6 @@ public class ProductDot implements Serializable{
 
     private Brand brand;
 
-//    private Long comment;
-
     private List<PictureDot> pictures;
 
     private MultipartFile[] newPictures;
@@ -57,20 +55,11 @@ public class ProductDot implements Serializable{
     this.pictures = product.getPictures().stream()
                 .map(PictureDot::new)
                 .collect(Collectors.toList());
-//    this.comment = product.getComment();
     }
 
     public ProductDot() {
-
     }
-//
-//    public Long getComment() {
-//        return comment;
-//    }
-//
-//    public void setComment(Long comment) {
-//        this.comment = comment;
-//    }
+
 
     public Long getId() {
         return id;

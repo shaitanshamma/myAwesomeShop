@@ -48,9 +48,6 @@ public class Product {
     @NotNull
     private Long quantity;
 
-//    @Column(name = "comment_fld")
-//    private Long comment;
-
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(name = "products_pictures_tbl",
             joinColumns = @JoinColumn(name = "product_id"),

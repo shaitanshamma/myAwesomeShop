@@ -15,7 +15,6 @@ public class AddressInfo implements Serializable {
     @NotBlank
     private String city;
 
-    //@NotBlank
     private Integer zipCode;
 
     @NotBlank
@@ -24,10 +23,8 @@ public class AddressInfo implements Serializable {
     @NotBlank
     private String street;
 
-    //@NotBlank
     private Integer appartaments;
 
-    //@NotBlank
     private Integer building;
 
     public AddressInfo() {

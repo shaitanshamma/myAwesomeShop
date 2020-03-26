@@ -44,10 +44,6 @@ public class EurekaController {
      @GetMapping("/createCategory")
      public void createCategory(Category category, Model model, BindingResult bindingResult) {
           model.addAttribute("activePage", "Category");
-//          if (bindingResult.hasErrors()) {
-//               return "admin/categories_form";
-//          }
           categoryRepository.save(category);
-//          return "redirect:/admin/categories";
      }
 }
