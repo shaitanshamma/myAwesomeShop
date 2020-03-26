@@ -60,7 +60,6 @@ public class ClientServiceImpl implements ClientService {
         client.setLogin(systemUser.getLogin());
         client.setPhone(systemUser.getPhone());
         client.setRoles(new HashSet<>(Collections.singletonList(roleRepository.findOneByTitle("ROLE_CLIENT"))));
-       // client.setRoles(new HashSet<>(Collections.singletonList(roleRepository.findOneByTitle("ROLE_ADMIN"))));
         clientRepository.save(client);
         return true;
     }
@@ -83,10 +82,6 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.findOneByName(name);
     }
 
-//    @Override
-//    public Optional<Client> findClientById(Long id) {
-//        return clientRepository.findById(id);
-//    }
 
     @Override
     public void delete(Long id) {

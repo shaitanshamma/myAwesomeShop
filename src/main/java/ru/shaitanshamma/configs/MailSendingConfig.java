@@ -22,50 +22,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MailSendingConfig {
-    //
-//    @Value("smtp.gmail.com")
-//    private String smptHost;
-//
-//    @Value("587")
-//    private Integer smtpPort;
-//
-//    @Bean
-//    public JavaMailSenderImpl mailSender() {
-//        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-//
-//        mailSender.setHost(smptHost);
-//        mailSender.setPort(587);
-//        return mailSender;
-//    }
-//
-//    @Bean
-//    public MessageChannel smtpChannel() {
-//        return new DirectChannel();
-//    }
-//
-//    @Bean
-//    public IntegrationFlow sendMailFlow() {
-//        return IntegrationFlows.from("smtpChannel")
-//                .handle(Mail.outboundAdapter("smtp.gmail.com")
-//                                .port(587)
-//                                .credentials("name", "pass")
-//                                .javaMailProperties(p -> {
-//                                    p.put("mail.debug", "true");
-//                                    p.put("mail.smtp.ssl.trust", "*");
-//                                    p.put("mail.smtp.starttls.enable", "true");
-//                                }),
-//                        e -> e.id("sendMailEndpoint")).get();
-//
-//    }
-//
-//    @ServiceActivator(inputChannel = "smtpChannel", outputChannel = "nullChannel")
-//    public MessageHandler mailsSenderMessagingHandler(Message<MailMessage> message) {
-//
-//        MailSendingMessageHandler mailSendingMessageHandler = new MailSendingMessageHandler(mailSender());
-//        mailSendingMessageHandler.handleMessage(message);
-//
-//        return mailSendingMessageHandler;
-//    }
+
     @Autowired
     public JavaMailSender emailSender;
 

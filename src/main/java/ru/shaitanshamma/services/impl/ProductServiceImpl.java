@@ -64,7 +64,6 @@ public class ProductServiceImpl implements ProductService {
         product.setPrice(productDot.getPrice());
         product.setAbout(productDot.getAbout());
         product.setQuantity(productDot.getQuantity());
-//        product.setComment(productDot.getComment());
         if (productDot.getNewPictures() != null) {
             for (MultipartFile newPicture : productDot.getNewPictures()) {
                 logger.info("Product {} file {} size {}", product.getId(),

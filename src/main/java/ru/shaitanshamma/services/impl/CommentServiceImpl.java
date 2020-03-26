@@ -48,7 +48,4 @@ public class CommentServiceImpl extends Comment implements EntitiesService {
         commentRepository.deleteById(id);
     }
 
-//    public Comment findCommentByClientId(Long id){
-//        Client client = clientRepository.findById(id);
-//    }
 }

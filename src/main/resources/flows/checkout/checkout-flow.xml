@@ -24,12 +24,6 @@
         </on-exit>
     </view-state>
 
-<!--    <action-state id="validateBasicUserInfo">-->
-<!--        <evaluate expression="userRegisterHandler.validateBasicUserInfo(basicInfo, messageContext)" />-->
-<!--        <transition on="success" to="personal" />-->
-<!--        <transition on="failure" to="basic" />-->
-<!--    </action-state>-->
-
     <view-state id="personal" view="flows/checkout/order-address" model="addressInfo">
         <transition on="basic" to="basic" />
         <transition on="confirm" to="confirm" />
@@ -38,12 +32,6 @@
             <evaluate expression="orderHandler.addAdressInfo(flowScope.orderModel, addressInfo)" />
         </on-exit>
     </view-state>
-
-<!--    <action-state id="validatePersonal">-->
-<!--        <evaluate expression="userRegisterHandler.validatePersonalUserInfo(personalInfo, messageContext)" />-->
-<!--        <transition on="success" to="confirm" />-->
-<!--        <transition on="failure" to="personal" />-->
-<!--    </action-state>-->
 
     <view-state id="confirm" view="flows/checkout/order-confirm" model="flowScope.orderModel">
         <transition on="personal" to="personal" />

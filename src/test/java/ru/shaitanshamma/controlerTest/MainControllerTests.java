@@ -10,7 +10,9 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -37,5 +39,20 @@ public class MainControllerTests {
         mvc.perform(get("/cart").contentType(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
                 .andExpect(view().name("cart"));
+    }
+
+    @Test
+    public void badCredentials() throws Exception {
+        mvc.perform(formLogin("/authenticateTheUser").user("admin").password("100"))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    public void correctLogin() throws Exception {
+        mvc.perform(formLogin("/authenticateTheUser").user("Bob").password("admin"))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/"));
     }
 }

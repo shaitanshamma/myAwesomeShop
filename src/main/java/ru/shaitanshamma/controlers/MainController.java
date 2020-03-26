@@ -10,16 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.shaitanshamma.entities.dot.ProductDot;
 import ru.shaitanshamma.repositories.CartItemRepr;
-import ru.shaitanshamma.repositories.ProductRepository;
-import ru.shaitanshamma.repositories.ProductRepr;
 import ru.shaitanshamma.services.CartService;
 import ru.shaitanshamma.services.ProductService;
 import ru.shaitanshamma.services.system.ProductInfo;
-
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+
 
 @Controller
 public class MainController {
