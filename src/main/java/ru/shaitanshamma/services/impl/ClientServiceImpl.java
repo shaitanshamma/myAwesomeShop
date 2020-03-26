@@ -79,6 +79,16 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public Optional<Client> findClientByName(String name) {
+        return clientRepository.findOneByName(name);
+    }
+
+//    @Override
+//    public Optional<Client> findClientById(Long id) {
+//        return clientRepository.findById(id);
+//    }
+
+    @Override
     public void delete(Long id) {
         clientRepository.deleteById(id);
     }

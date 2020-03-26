@@ -139,7 +139,8 @@
                                 </div>
                                 <div class="cart-btns">
                                     <a th:href="@{cart}">View Cart</a>
-                                    <a th:href="@{checkout}">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a sec:authorize="!isAuthenticated()" th:href="@{login}">Login to order <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a sec:authorize="isAuthenticated()" th:href="@{checkout}">Checkout <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>

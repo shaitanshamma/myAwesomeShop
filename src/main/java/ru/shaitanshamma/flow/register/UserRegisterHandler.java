@@ -3,6 +3,7 @@ package ru.shaitanshamma.flow.register;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.shaitanshamma.configs.MailSendingConfig;
 import ru.shaitanshamma.services.ClientService;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
@@ -22,6 +23,9 @@ public class UserRegisterHandler {
     public UserRegisterHandler(ClientService clientService) {
         this.clientService = clientService;
     }
+
+    @Autowired
+    public MailSendingConfig mailSendingConfig;
 
     public UserRegisterModel init() {
         return new UserRegisterModel();
@@ -63,6 +67,7 @@ public class UserRegisterHandler {
                     urm.getPersonalUserInfo().getPhone());
 
             clientService.save(systemUser);
+            mailSendingConfig.sendSimpleMessage(systemUser.getEmail(),"Registration complete", "You register at MyAwesomeShop!");
         } catch (Exception ex) {
             logger.error("", ex);
             error.addMessage(new MessageBuilder()

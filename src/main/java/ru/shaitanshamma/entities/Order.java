@@ -32,4 +32,7 @@ public class Order {
     @CreationTimestamp
     private LocalDateTime createAt;
 
+    public Order(Client client) {
+        this.client = client;
+    }
 }

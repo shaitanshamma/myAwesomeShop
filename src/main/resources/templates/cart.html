@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/header.html :: head"></head>
 
 <body>
@@ -53,18 +54,24 @@
                 <tr th:each="prod : ${product}">
                     <td th:text="${prod.getKey().product.title}"></td>
                     <td th:text="${prod.getKey().product.categoriesAsString}"></td>
-                    <td th:text="${prod.getKey().product.brand}"></td>
+                    <td th:text="${prod.getKey().product.brand.title}"></td>
                     <td th:text="${prod.getKey().product.price}"></td>
                     <td>
                         <img th:src="@{/picture/{pictureId}(pictureId=${prod.getKey().product.pictures[0].id})}"
-                             th:width= "100px" alt="">
+                             th:width="100px" alt="">
                     </td>
-<!--                        <a th:href="@{product/{id}/edit(id=${prod.id})}" class="btn btn-icon btn-pill btn-primary" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-edit"></i></a>-->
-<!--                        <a th:href="@{product/{id}/delete(id=${prod.id})}" class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-fw fa-trash"></i></a>-->
-<!--                    </td>-->
+                    <!--                        <a th:href="@{product/{id}/edit(id=${prod.id})}" class="btn btn-icon btn-pill btn-primary" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-edit"></i></a>-->
+                    <!--                        <a th:href="@{product/{id}/delete(id=${prod.id})}" class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-fw fa-trash"></i></a>-->
+                    <!--                    </td>-->
                 </tr>
                 </tbody>
             </table>
+            <div sec:authorize="isAuthenticated()">
+                <a class="primary-btn cta-btn" href="/checkout">Checkout</a>
+            </div>
+            <div sec:authorize="!isAuthenticated()">
+                <a class="primary-btn cta-btn" href="/login">Login to make order</a>
+            </div>
         </div>
         <!-- /row -->
     </div>

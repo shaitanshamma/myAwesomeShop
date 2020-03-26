@@ -2,6 +2,7 @@ package ru.shaitanshamma.services.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import ru.shaitanshamma.services.CartService;
 import ru.shaitanshamma.services.system.ProductInfo;
 
@@ -11,10 +12,14 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
+@Component
 public class CartServiceImpl implements CartService {
 
     private static final Logger logger = LoggerFactory.getLogger(CartServiceImpl.class);
+
+    public Map<ProductInfo, Integer> getCartItems() {
+        return cartItems;
+    }
 
     private Map<ProductInfo, Integer> cartItems;
 
