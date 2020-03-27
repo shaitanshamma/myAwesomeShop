@@ -3,15 +3,16 @@ package ru.shaitanshamma.flow.order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
 import ru.shaitanshamma.configs.MailSendingConfig;
-import ru.shaitanshamma.entities.Client;
-import ru.shaitanshamma.entities.OrderAdress;
-import ru.shaitanshamma.services.ClientService;
-import ru.shaitanshamma.services.OrderAddressService;
-import ru.shaitanshamma.services.OrderService;
-import ru.shaitanshamma.services.impl.CartServiceImpl;
+import ru.shaitanshamma.entities.*;
+import ru.shaitanshamma.entities.dot.ProductDot;
+import ru.shaitanshamma.services.*;
 import ru.shaitanshamma.services.system.SystemUser;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -21,34 +22,39 @@ public class OrderHandler {
     private OrderAddressService orderAddressService;
     private ClientService clientService;
     private OrderService orderService;
-    private CartServiceImpl cartService;
 
     @Autowired
     public OrderHandler(OrderAddressService orderAddressService,
                         ClientService clientService,
-                        OrderService orderService, CartServiceImpl cartService){
+                        OrderService orderService) {
         this.orderAddressService = orderAddressService;
         this.clientService = clientService;
         this.orderService = orderService;
-        this.cartService = cartService;
     }
+
     @Autowired
     public MailSendingConfig mailSendingConfig;
 
-    public OrderModel init(){
+    @Autowired
+    public CartService cartService;
+    @Autowired
+    public OrderListService orderListService;
+
+    public OrderModel init() {
         return new OrderModel();
     }
 
-    public void addBasicOrderInfo(OrderModel orderModel, BasicOrderInfo basicOrderInfo){
+    public void addBasicOrderInfo(OrderModel orderModel, BasicOrderInfo basicOrderInfo) {
         orderModel.setBasicOrderInfo(basicOrderInfo);
     }
 
-    public void addAdressInfo(OrderModel orderModel, AddressInfo addressInfo){
+    public void addAdressInfo(OrderModel orderModel, AddressInfo addressInfo) {
         orderModel.setAddressInfo(addressInfo);
     }
 
-    public void save(OrderModel orderModel){
+    public void save(OrderModel orderModel) throws IOException {
         OrderAdress orderAdress = new OrderAdress();
+        Order order;
         orderAdress.setAppartament(orderModel.getAddressInfo().getAppartaments());
         orderAdress.setCity(orderModel.getAddressInfo().getCity());
         orderAdress.setCountry(orderModel.getAddressInfo().getCountry());
@@ -60,9 +66,44 @@ public class OrderHandler {
         Optional<SystemUser> user = clientService.findByName(orderModel.getBasicOrderInfo().getFirstName());
         Optional<Client> client = clientService.findClientByName(orderModel.getBasicOrderInfo().getFirstName());
         orderAdress.setIdClient(user.get().getId());
-        //cartService.getCartItems().values().stream().forEach((i -> orderAdress.addItem(i)));
+        order = orderService.makeOrder(client.get());
+        saveOrderList(order);
         orderAddressService.save(orderAdress);
-        orderService.makeOrder(client.get());
+        /*
+        Need insert user pass to email confiq
         mailSendingConfig.sendSimpleMessage(user.get().getEmail(),"New order", "You create new order!");
+        */
+    }
+
+    public void saveOrderList(Order order) throws IOException {
+        List<ProductDot> productDotList = new ArrayList<>();
+        cartService.findAllItems().keySet().stream().forEach(pi -> productDotList.add(pi.getProduct()));
+        for (ProductDot p : productDotList
+        ) {
+            OrderList orderList = new OrderList();
+            Product product = new Product();
+            product.setId(p.getId());
+            product.setCategories(p.getCategories());
+            product.setTitle(p.getTitle());
+            product.setAbout(p.getAbout());
+            product.setQuantity(p.getQuantity());
+            product.setBrand(p.getBrand());
+            product.setPrice(p.getPrice());
+            if (p.getNewPictures() != null) {
+                for (MultipartFile newPicture : p.getNewPictures()) {
+                    if (product.getPictures() == null) {
+                        product.setPictures(new ArrayList<>());
+                    }
+                    product.getPictures().add(new Picture(newPicture.getOriginalFilename(),
+                            newPicture.getContentType(), new PictureData(newPicture.getBytes())));
+                }
+            }
+            orderList.setProduct(product);
+            orderList.setItemPrice(product.getPrice());
+            orderList.setOrder(order);
+            orderList.setQuantity(product.getQuantity());
+            orderList.setTotalPrice(cartService.getSubTotal());
+            orderListService.save(orderList);
+        }
     }
 }

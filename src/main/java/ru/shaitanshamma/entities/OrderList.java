@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -27,9 +28,9 @@ public class OrderList {
     private Long quantity;
 
     @Column(name = "item_price_fld")
-    private Double itemPrice;
+    private BigDecimal itemPrice;
 
     @Column(name = "total_price_fld")
-    private Double totalPrice;
+    private BigDecimal totalPrice;
 
 }
